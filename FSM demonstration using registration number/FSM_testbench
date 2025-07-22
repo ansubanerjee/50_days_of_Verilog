@@ -1,0 +1,25 @@
+module tb;
+    reg clk;
+    reg rst;
+    reg x;
+    wire [3:0] state;
+    task2 uut (clk, rst, x, state);
+    always #10 clk = ~clk;
+    initial begin
+        clk = 0;
+        rst = 1;
+        x = 0;
+        #15 rst = 0;
+        #25 x=1;
+        #35 x=0;
+        #45 x=1;
+        #55 x=1;
+        #65 x=1;
+        #75 x=1;
+        #85 x=0;
+        #100 $finish;
+    end
+    initial begin
+        $monitor("Time: %0t | Clock: %b | rst: %b | x: %b | state: %b", $time, clk , rst, x, state);
+    end
+endmodule

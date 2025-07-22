@@ -1,0 +1,22 @@
+module task2(input clk, rst, x, output reg[3:0] state);
+    reg[3:0] nxtstate;
+    always @(posedge clk)
+    begin
+        if(rst==1 )
+            state<=4'b0010;
+        else
+            state<=nxtstate;
+    end
+    always @(*)
+    case(state)
+        4'b0010:nxtstate<=x?4'b1011:4'b0000;
+        4'b1011:nxtstate<=x?4'b1110:4'b0011;
+        4'b1110:nxtstate<=x?4'b1000:4'b1011;
+        4'b1000:nxtstate<=x?4'b0000:4'b1110;
+        4'b0000:nxtstate<=x?4'b0001:4'b1100;
+        4'b0001:nxtstate<=x?4'b0011:4'b0000;
+        4'b0011:nxtstate<=x?4'b0000:4'b0001;
+        4'b0000:nxtstate<=x?4'b0010:4'b0011;
+        default:nxtstate<=4'b0010;
+    endcase
+endmodule
