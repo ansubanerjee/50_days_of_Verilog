@@ -1,0 +1,22 @@
+module tb_traffic_light;
+
+    reg clk = 0, reset = 1;
+    wire red, yellow, green;
+
+    traffic_light_controller uut (
+        .clk(clk),
+        .reset(reset),
+        .red(red),
+        .yellow(yellow),
+        .green(green)
+    );
+
+    always #5 clk = ~clk;  // 10 time units = 1 full clock cycle
+
+    initial begin
+        $display("Starting simulation...");
+        #10 reset = 0;
+        #200 $finish;
+    end
+
+endmodule
