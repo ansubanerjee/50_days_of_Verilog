@@ -1,0 +1,14 @@
+module johnson_testbench;
+    reg clk = 0;
+    reg rst = 1;
+    wire [3:0] q;
+
+    johnson_counter uut(.clk(clk), .rst(rst), .q(q));
+
+    always #10 clk = ~clk;
+
+    initial begin
+        #20 rst = 0;
+        #200 $finish;
+    end
+endmodule
